@@ -114,6 +114,7 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Save(name)
+print("TEST")
 		if (not name) then
 			return false, 'no config file is selected'
 		end
