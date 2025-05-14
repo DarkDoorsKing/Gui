@@ -119,7 +119,7 @@ local SaveManager = {} do
 		end
 		SaveManager:CheckFolderTree()
 		
-		local fullPath = self.Folder .. '/settings/' .. name .. '.json'
+		local fullPath = self.Folder .. '/' .. name .. '.json'
 		local data = {
 			objects = {}
 		}
@@ -206,7 +206,7 @@ local SaveManager = {} do
 
 	function SaveManager:RefreshConfigList()
 		SaveManager:CheckFolderTree()
-		local list = listfiles(self.Folder .. '/settings')
+		local list = listfiles(self.Folder .. '')
 
 		local out = {}
 		for i = 1, #list do
