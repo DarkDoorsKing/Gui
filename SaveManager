@@ -114,7 +114,6 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Save(name)
-print("TEST")
 		if (not name) then
 			return false, 'no config file is selected'
 		end
@@ -194,7 +193,7 @@ print("TEST")
 		local paths = {
 			self.Folder,
 			self.Folder .. '/themes',
-			self.Folder .. '/settings'
+			self.Folder .. ''
 		}
 
 		for i = 1, #paths do
@@ -255,7 +254,7 @@ print("TEST")
 
 	function SaveManager:BuildConfigSection(tab)
 		assert(self.Library, 'Must set SaveManager.Library')
-
+--[[
 		local section = tab:AddRightGroupbox('Configuration')
 
 		section:AddInput('SaveManager_ConfigName',    { Text = 'Config name' })
@@ -336,13 +335,13 @@ print("TEST")
 		end)
 
 		SaveManager.AutoloadLabel = section:AddLabel('Current autoload config: none', true)
-
+--]]
 		if isfile(self.Folder .. '/settings/autoload.txt') then
 			local name = readfile(self.Folder .. '/settings/autoload.txt')
-			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
+			--SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
 		end
 
-		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
+		--SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
 	end
 
 	SaveManager:BuildFolderTree()
