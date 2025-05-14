@@ -152,7 +152,7 @@ local SaveManager = {} do
 		end
 		SaveManager:CheckFolderTree()
 		
-		local file = self.Folder .. '/settings/' .. name .. '.json'
+		local file = self.Folder .. '/' .. name .. '.json'
 		if not isfile(file) then return false, 'invalid file' end
 
 		local success, decoded = pcall(httpService.JSONDecode, httpService, readfile(file))
@@ -172,7 +172,7 @@ local SaveManager = {} do
 			return false, 'no config file is selected'
 		end
 		
-		local file = self.Folder .. '/settings/' .. name .. '.json'
+		local file = self.Folder .. '/' .. name .. '.json'
 		if not isfile(file) then return false, 'invalid file' end
 
 		local success, decoded = pcall(delfile, file)
