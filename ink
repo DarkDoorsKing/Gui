@@ -19,8 +19,8 @@ pcall(ProtectGui, ScreenGui);
 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.DisplayOrder = 9999999
-local Parented = pcall(function() ScreenGui.Parent = GetHUI(); end);
-if not Parented then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui", 9e9) end;
+local Parented = pcall(function() ScreenGui.Parent = CoreGui end);
+if not Parented then ScreenGui.Parent = CoreGui end;
 
 --[[
     You can access Toggles & Options through (I'm planning to remove **a** option):
