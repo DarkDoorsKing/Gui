@@ -1,7 +1,6 @@
 local cloneref = (cloneref or clonereference or function(instance: any) return instance end)
 local InputService: UserInputService = cloneref(game:GetService('UserInputService'));
 local TextService: TextService = cloneref(game:GetService('TextService'));
-local CoreGui: CoreGui = cloneref(game:GetService('CoreGui'));
 local Teams: Teams = cloneref(game:GetService('Teams'));
 local Players: Players = cloneref(game:GetService('Players'));
 local RunService: RunService = cloneref(game:GetService('RunService'));
@@ -9,6 +8,7 @@ local TweenService: TweenService = cloneref(game:GetService('TweenService'));
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
+local CoreGui: CoreGui = gethui()
 local DrawingLib = typeof(Drawing) == "table" and Drawing or { drawing_replaced = true };
 local ProtectGui = protectgui or (function() end);
 local GetHUI = gethui or (function() return CoreGui end);
@@ -19,8 +19,8 @@ pcall(ProtectGui, ScreenGui);
 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.DisplayOrder = 9999999
-local Parented = pcall(function() ScreenGui.Parent = GetHUI(); end);
-if not Parented then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui", 9e9) end;
+local Parented = pcall(function() ScreenGui.Parent = gethui() end);
+if not Parented then ScreenGui.Parent = gethui() end;
 
 --[[
     You can access Toggles & Options through (I'm planning to remove **a** option):
