@@ -26,40 +26,40 @@ local DrawingLib = if typeof(Drawing) == "table" then Drawing else { drawing_rep
 local IsBadDrawingLib = false;
 
 local assert = function(condition, errorMessage) 
-	if (not condition) then
-		error(if errorMessage then errorMessage else "assert failed", 3);
-	end;
+    if (not condition) then
+        error(if errorMessage then errorMessage else "assert failed", 3);
+    end;
 end;
 
 local function SafeParentUI(Instance: Instance, Parent: Instance | () -> Instance)
-	local success, _error = pcall(function()
-		if not Parent then
-			Parent = CoreGui
-		end
+    local success, _error = pcall(function()
+        if not Parent then
+            Parent = CoreGui
+        end
 
-		local DestinationParent
-		if typeof(Parent) == "function" then
-			DestinationParent = Parent()
-		else
-			DestinationParent = Parent
-		end
+        local DestinationParent
+        if typeof(Parent) == "function" then
+            DestinationParent = Parent()
+        else
+            DestinationParent = Parent
+        end
 
-		Instance.Parent = DestinationParent
-	end)
+        Instance.Parent = DestinationParent
+    end)
 
-	if not (success and Instance.Parent) then
-		Instance.Parent = LocalPlayer:WaitForChild("PlayerGui", math.huge)
-	end
+    if not (success and Instance.Parent) then
+        Instance.Parent = LocalPlayer:WaitForChild("PlayerGui", math.huge)
+    end
 end
 
 local function ParentUI(UI: Instance, SkipHiddenUI: boolean?)
-	if SkipHiddenUI then
-		SafeParentUI(UI, CoreGui)
-		return
-	end
+    if SkipHiddenUI then
+        SafeParentUI(UI, CoreGui)
+        return
+    end
 
-	pcall(ProtectGui, UI)
-	SafeParentUI(UI, GetHUI)
+    pcall(ProtectGui, UI)
+    SafeParentUI(UI, GetHUI)
 end
 
 local ScreenGui = Instance.new('ScreenGui');
@@ -67,8 +67,8 @@ pcall(ProtectGui, ScreenGui);
 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.DisplayOrder = 9999999
-local Parented = pcall(function() ScreenGui.Parent = CoreGui end);
-if not Parented then ScreenGui.Parent = CoreGui end;
+local Parented = pcall(function() ScreenGui.Parent = GetHUI(); end);
+if not Parented then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui", 9e9) end;
 
 --[[
     You can access Toggles & Options through (I'm planning to remove **a** option):
@@ -1052,7 +1052,7 @@ do
 		});
 
 
-
+	
 
 		Library:AddToRegistry(PickerFrameInner, { BackgroundColor3 = 'BackgroundColor'; BorderColor3 = 'OutlineColor'; });
 		Library:AddToRegistry(Highlight, { BackgroundColor3 = 'AccentColor'; });
@@ -1210,14 +1210,14 @@ do
 				if PickerFrameOuter.Visible then
 					ColorPicker:Hide()
 				else
-
+					
 					ColorPicker:Show()
 				end;
 			elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
-
+			
 				ColorPicker:Hide()
-
-
+		
+				
 			end
 		end);
 
@@ -1251,10 +1251,10 @@ do
 					ColorPicker:Hide();
 				end;
 
-
+				
 			end;
 
-
+			
 		end))
 
 		ColorPicker:Display();
